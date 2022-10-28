@@ -14,19 +14,18 @@ import java.util.Optional;
 public class NoteController {
     @Autowired
     private NoteService noteService;
-    @Autowired
 
     @GetMapping("/user/{userId}")
     public List<NoteDto> getNotesByUser(@PathVariable Long userId) {
         return noteService.getAllNotesByUserId(userId);
     }
 
-    @PostMapping
+    @PostMapping("/{noteId}")
     public void addNote(@RequestBody NoteDto noteDto, @PathVariable Long userId) {
         noteService.addNote(noteDto, userId);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{noteId}")
     public void deleteNoteById(@PathVariable Long noteId) {
         noteService.deleteNoteById(noteId);
     }
@@ -36,7 +35,7 @@ public class NoteController {
         noteService.updateNoteById(noteDto);
     }
 
-    @GetMapping
+    @GetMapping("/{noteId}")
     public Optional<NoteDto> getNoteById(@PathVariable Long noteId) {
         return noteService.getNoteById(noteId);
     }
